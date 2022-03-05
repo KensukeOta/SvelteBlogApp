@@ -42,6 +42,9 @@ export default {
 		svelte({
 			preprocess: sveltePreprocess({
 				sourceMap: !production,
+				scss: {
+					prependData: `@import 'src/styles/variables.scss';`
+				},
 				postcss: {
 					plugins: [
 						require('tailwindcss'),
