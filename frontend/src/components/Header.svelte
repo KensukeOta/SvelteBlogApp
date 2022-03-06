@@ -1,15 +1,15 @@
 <script lang="ts">
-
+import { Link } from "svelte-routing";
 </script>
 
 <header>
-  <a href="/">
+  <Link to="/">
     <h1>SvelteBlogApp</h1>
-  </a>
+  </Link>
 
   <nav>
-    <a href="/signup">新規登録</a>
-    <a href="/login">ログイン</a>
+    <Link to="/signup">新規登録</Link>
+    <Link to="/login">ログイン</Link>
   </nav>
 </header>
 

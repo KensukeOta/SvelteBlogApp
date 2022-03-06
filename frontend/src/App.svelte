@@ -1,18 +1,17 @@
 <script lang="ts">
-import Footer from "./components/Footer.svelte";
-import Header from "./components/Header.svelte";
+import { Router, Route } from "svelte-routing";
+import Home from "./pages/Home.svelte";
+import LoginForm from "./pages/LoginForm.svelte";
+import RegisterForm from "./pages/RegisterForm.svelte";
 
-	export let name: string;
+	export let url: string = "";
 </script>
 
-<Header />
-
-<main>
-	<h1 class="font-bold">Hello {name}!</h1>
-	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
-</main>
-
-<Footer />	
+<Router url={url}>
+	<Route path="/signup" component="{RegisterForm}" />
+	<Route path="/login" component="{LoginForm}" />
+	<Route path="/"><Home /></Route>
+</Router>
 
 <style global lang="postcss">
 	@tailwind base;
