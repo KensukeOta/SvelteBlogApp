@@ -30,6 +30,7 @@
   },
   "dependencies": {
     "axios": "^0.26.1",
+    "felte": "^1.0.1",
     "sirv-cli": "^2.0.0",
     "svelte-routing": "^1.6.0"
   }
