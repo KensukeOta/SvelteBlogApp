@@ -7,6 +7,7 @@
   import { axios } from "../lib/axios";
   import { isLogin } from "../stores/loginStatus";
   import { navigate } from "svelte-routing";
+  import { authUserInfo } from "../stores/authUserInfo";
 
   let errorMsg: string;
 
@@ -36,6 +37,7 @@
         await axios.get('http://localhost:8000/sanctum/csrf-cookie');
         const res = await axios.post('http://localhost:8000/api/login', { email: values.email, password: values.password });
         isLogin.update(n => n = !n);
+        authUserInfo.update(n => n = res.data);
         navigate("/", { replace: true });
       } catch (error) {
         errorMsg = error.response.data.message;
