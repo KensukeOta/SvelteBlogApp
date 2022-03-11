@@ -4,6 +4,11 @@
   import { createForm } from 'felte';
   import { validator } from '@felte/validator-yup';
   import * as yup from 'yup';
+  import { axios } from "../lib/axios";
+  import { isLogin } from "../stores/loginStatus";
+  import { navigate } from "svelte-routing";
+
+  let errorMsg: string;
 
   yup.setLocale({
     mixed: {
@@ -25,8 +30,16 @@
       password: ""
     },
     extend: validator({ schema }),
-    onSubmit: (values) => {
-      console.log(values);
+    
+    onSubmit: async (values) => {
+      try {
+        await axios.get('http://localhost:8000/sanctum/csrf-cookie');
+        const res = await axios.post('http://localhost:8000/api/login', { email: values.email, password: values.password });
+        isLogin.update(n => n = !n);
+        navigate("/", { replace: true });
+      } catch (error) {
+        errorMsg = error.response.data.message;
+      }
     }
   })
 </script>
@@ -36,6 +49,9 @@
 <h1>ログインフォーム</h1>
 
 <form use:form>
+  {#if errorMsg}
+    <p class="valid-msg">{errorMsg}</p>
+  {/if}
   <dl>
     <dt><label for="email">メールアドレス</label></dt>
     <dd><input type="email" name="email" id="email" placeholder="メールアドレス"></dd>
