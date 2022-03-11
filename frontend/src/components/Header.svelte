@@ -6,7 +6,7 @@
 
   async function logout() {
     await axios.get('http://localhost:8000/sanctum/csrf-cookie');
-    await axios.post('http://localhost:8000/api/logout');
+    await axios.post('http://localhost:8000/logout');
     isLogin.update(n => n = !n);
     authUserInfo.update(n => n = "");
     navigate("/login", { replace: true });

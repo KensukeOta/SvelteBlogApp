@@ -35,7 +35,7 @@
     onSubmit: async (values) => {
       try {
         await axios.get('http://localhost:8000/sanctum/csrf-cookie');
-        const res = await axios.post('http://localhost:8000/api/login', { email: values.email, password: values.password });
+        const res = await axios.post('http://localhost:8000/login', { email: values.email, password: values.password });
         isLogin.update(n => n = !n);
         authUserInfo.update(n => n = res.data);
         navigate("/", { replace: true });
