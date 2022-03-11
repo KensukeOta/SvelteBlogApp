@@ -1,5 +1,14 @@
 <script lang="ts">
-import { Link } from "svelte-routing";
+  import { axios } from "../lib/axios";
+  import { Link, navigate } from "svelte-routing";
+  import { isLogin } from '../stores/loginStatus';
+
+  async function logout() {
+    await axios.get('http://localhost:8000/sanctum/csrf-cookie');
+    await axios.post('http://localhost:8000/api/logout');
+    isLogin.update(n => n = !n);
+    navigate("/login", { replace: true });
+  }
 </script>
 
 <header>
@@ -9,7 +18,11 @@ import { Link } from "svelte-routing";
 
   <nav>
     <Link to="/signup">新規登録</Link>
-    <Link to="/login">ログイン</Link>
+    {#if $isLogin}
+      <button on:click={logout}>ログアウト</button>
+    {:else}
+      <Link to="/login">ログイン</Link>
+    {/if}
   </nav>
 </header>
 
