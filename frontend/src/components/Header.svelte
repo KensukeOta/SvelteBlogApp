@@ -1,16 +1,7 @@
 <script lang="ts">
-  import { axios } from "../lib/axios";
-  import { Link, navigate } from "svelte-routing";
+  import { Link } from "svelte-routing";
   import { isLogin } from '../stores/loginStatus';
-  import { authUserInfo } from "../stores/authUserInfo";
-
-  async function logout() {
-    await axios.get('http://localhost:8000/sanctum/csrf-cookie');
-    await axios.post('http://localhost:8000/logout');
-    isLogin.update(n => n = !n);
-    authUserInfo.update(n => n = "");
-    navigate("/login", { replace: true });
-  }
+  import LogoutButton from "./atom/LogoutButton.svelte";
 </script>
 
 <header>
@@ -20,7 +11,7 @@
 
   <nav>
     {#if $isLogin}
-      <button on:click={logout}>ログアウト</button>
+      <LogoutButton />
     {:else}
       <Link to="/signup">新規登録</Link>
       <Link to="/login">ログイン</Link>
