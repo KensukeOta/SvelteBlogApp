@@ -32,7 +32,7 @@
     <p>Loading...</p>
   {:then posts} 
     {#each posts as post (post.id)}
-      <PostItem title={post.title} author={post.user.name} />
+      <PostItem post={post} />
     {/each}
   {:catch error}
     <p>情報が取得できませんでした...</p>
