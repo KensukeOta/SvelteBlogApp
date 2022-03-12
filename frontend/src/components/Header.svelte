@@ -1,20 +1,20 @@
 <script lang="ts">
-  import { Link } from "svelte-routing";
   import { isLogin } from '../stores/loginStatus';
+  import AnchorButton from "./atom/AnchorButton.svelte";
   import LogoutButton from "./atom/LogoutButton.svelte";
 </script>
 
 <header>
-  <Link to="/">
+  <AnchorButton path="/">
     <h1>SvelteBlogApp</h1>
-  </Link>
+  </AnchorButton>
 
   <nav>
     {#if $isLogin}
       <LogoutButton />
     {:else}
-      <Link to="/signup">新規登録</Link>
-      <Link to="/login">ログイン</Link>
+      <AnchorButton path="/signup">新規登録</AnchorButton>
+      <AnchorButton path="/login">ログイン</AnchorButton>
     {/if}
   </nav>
 </header>
