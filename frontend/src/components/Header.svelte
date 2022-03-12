@@ -19,10 +19,10 @@
   </Link>
 
   <nav>
-    <Link to="/signup">新規登録</Link>
     {#if $isLogin}
       <button on:click={logout}>ログアウト</button>
     {:else}
+      <Link to="/signup">新規登録</Link>
       <Link to="/login">ログイン</Link>
     {/if}
   </nav>

@@ -8,8 +8,15 @@
   import { isLogin } from "../stores/loginStatus";
   import { navigate } from "svelte-routing";
   import { authUserInfo } from "../stores/authUserInfo";
+  import { onMount } from "svelte";
 
   let errorMsg: string;
+
+  onMount(() => {
+    if ($isLogin) {
+      navigate('/', { replace: true });
+    }
+  });
 
   yup.setLocale({
     mixed: {
