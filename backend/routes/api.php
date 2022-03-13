@@ -25,4 +25,5 @@ Route::post('/register', [RegisterController::class, 'register']);
 Route::controller(PostController::class)->group(function () {
     Route::get('/posts', 'index');
     Route::post('/store', 'store');
+    Route::get('/posts/{id}', 'show')->where('id', '[0-9]+');
 });
