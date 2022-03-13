@@ -14,6 +14,9 @@
     <AnchorButton path={`/posts/${post.id}/edit`}>
       <EditButton />
     </AnchorButton>
+    <button on:click={del}>
+      <DeleteButton />
+    </button>
     {/if}
   </nav>
 </li>
