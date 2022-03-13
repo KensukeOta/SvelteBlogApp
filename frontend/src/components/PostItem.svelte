@@ -1,9 +1,21 @@
 <script lang="ts">
+  import { navigate } from "svelte-routing";
+  import { axios } from "../lib/axios";
   import { authUserInfo } from "../stores/authUserInfo";
   import AnchorButton from "./atom/AnchorButton.svelte";
+  import DeleteButton from "./atom/DeleteButton.svelte";
   import EditButton from "./atom/EditButton.svelte";
 
   export let post;
+
+  async function del() {
+    if (!confirm('この記事を削除しますか?')) {
+      return;
+    }
+    await axios.get('http://localhost:8000/sanctum/csrf-cookie');
+    await axios.delete(`http://localhost:8000/api/posts/${post.id}/destroy`);
+    navigate('/', { replace: true });
+  }
 </script>
 
 <li class="border p-2">
